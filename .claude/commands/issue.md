@@ -10,12 +10,12 @@ Then:
 
 1. **Create a feature branch from `BASE_BRANCH`.** `git checkout $BASE_BRANCH && git pull origin $BASE_BRANCH`, then a branch named per CLAUDE.md › Git workflow: `feat/<issue>-<slug>` or `fix/<issue>-<slug>`. Example: `feat/12-linac-5`.
 
-2. **Plan your approach.** Before writing code, outline which files change and why, and share the plan briefly. Keep to CLAUDE.md › Architecture: pass/fail logic lives in `js/checks.js`, per-linac numbers in `js/linacs/`, and only `js/app.js` and `js/report.js` touch the DOM. If the issue adds or changes a reference value, a tolerance or instruction text, you need the source document (CLAUDE.md › Source documents) — ask the user for it rather than guessing a number.
+2. **Plan your approach.** Before writing code, outline which files change and why, and share the plan briefly. Keep to CLAUDE.md › Architecture: pass/fail logic lives in `js/checks.js`, per-linac numbers in `js/linacs/`, and only `js/app.js` touches the DOM. If the issue adds or changes a reference value, a tolerance or instruction text, you need the source document (CLAUDE.md › Source documents) — ask the user for it rather than guessing a number.
 
 3. **Implement the changes.** Follow CLAUDE.md conventions. Read existing files before modifying them. Keep changes minimal and focused on the issue. For each meaningful change, be ready to explain **why** — the intention behind the code should be clear to a reviewer reading the diff.
 
 4. **Test and look — all must pass.**
-   - `node --test` — the exit code is the verdict. Add or update tests for logic you change (`checks.js`, `protocol.js`, `store.js`, linac data).
+   - `node --test` — the exit code is the verdict. Add or update tests for logic you change (`checks.js`, `format.js`, `protocol.js`, `report.js`, `store.js`, linac data).
    - A new file the page loads goes into `PRECACHE` in `sw.js` (the test reds otherwise), with `CACHE` bumped.
    - **Look at it in a browser at phone size** (390 × 844). Serve with `python3 -m http.server 8000` in the background, capturing its PID. For a static view, `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --window-size=390,844 --screenshot=<scratchpad>/shot.png http://localhost:8000/`; when values must be typed first, drive the installed Chrome with Playwright (`playwright-core` installed in the scratchpad, `executablePath` pointing at Chrome). For a report change, print to PDF and read every page. Kill the server and confirm it is gone (CLAUDE.md › Processes you start).
 
