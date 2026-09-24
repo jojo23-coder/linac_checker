@@ -2,7 +2,8 @@
 // instruction text and which pass/fail rule. No DOM (CLAUDE.md › Architecture).
 //
 // Instruction text is verbatim from the instruction below (CLAUDE.md › Source documents); a
-// "\n" is a line break in the original. Tolerances that are the same for every linac are set
+// "\n" is a line break in the original, and "[intern sökväg]" / "[internt id]" mark internal
+// file paths and system ids left out because the site is public. Tolerances that are the same for every linac are set
 // here and cite the Linac 4 workbook's sheet Referensvärden; per-beam reference values come
 // from the linac's data file in js/linacs/.
 
@@ -78,7 +79,7 @@ function generalGroup(linac) {
     title: "Allmänt",
     short: "Allmänt",
     intro: [
-      "Skapa en ny mapp under OneDrive - Region Västerbotten\\Strålningsfysik (SP)\\Strålterapi\\Utrustning\\Behandling\\Varian TrueBeam\\Linac X\\Årskontroll\\ (byt ut ”ÅÅÅÅ” till det aktuella året).",
+      "Skapa en ny mapp under [intern sökväg] (byt ut ”ÅÅÅÅ” till det aktuella året).",
       "Öppna exceldokument ”Årskontroll ÅÅÅÅ LinacX (Varian True Beam) Resultat.xls” i kvalitetshandboken. Döp om dokumentet genom att byta ut ”ÅÅÅÅ” till det aktuella året och spara det i katalogen som nyss skapats. Spara även övriga mätfiler från årskontrollen i samma mapp.",
     ],
     sections: [
@@ -333,7 +334,7 @@ function outputSection(beam, number) {
     title: "Dosmonitor/output",
     optional: "Denna del behöver inte utföras om absolutdosen har kontrollerats under det senaste halvåret.",
     intro: [
-      "Denna del behöver inte utföras om absolutdosen har kontrollerats under det senaste halvåret (se loggen under resp flik ”LXA” och ”LXB” i V:\\Samarbetsytor\\Strålbehandlingen (00465)\\CIMT\\Strålningsfysik\\Utrustningskontroller\\Veckokontroller\\References Linac QA.xlsm).",
+      "Denna del behöver inte utföras om absolutdosen har kontrollerats under det senaste halvåret (se loggen under resp flik ”LXA” och ”LXB” i [intern sökväg]).",
       "Dos i referensgeometrin (se dokumentet Referensvärden Dosimetri Strålbehandling). Använd den cylindriska jonkammare som ska användas vid doskontroller tillsammans med den ”lilla vattenbaljan”. Bestråla med det antal MU som ska ge 1 Gy. Beräkna dosen enligt TRS 398 rev1 (IAEA, 2024). Tolerans: ±2%. OBS! Jämför också med senast körda veckokontroll.",
     ],
     link: { href: DOSE_APP_URL, text: "Beräkna dosen i Absolute Dose Calibration" },
@@ -378,7 +379,7 @@ function wedgeSection(beam, number) {
     optional: "Ska utföras ifall Y-blocken har kalibrerats, annars i mån av tid.",
     intro: [
       "Ska utföras ifall Y-blocken har kalibrerats, annars i mån av tid.",
-      "Mätningarna utförs med StarTrack-systemet (IBA) som placeras inuti fantomet MatriXX MultiCube och linjeras upp med laserlinjer och markeringar på fantomet. StartTrack skall vridas så att elektroniken är riktade mot bordets fotände. Förbestråla 300 MU med ett 20×20 cm² fält. Mät sedan upp dosfördelningen för 100 MU med ett öppet 20×20 cm² fält. Använd patient 0000-101 (HD-MLC) resp 105 (Millenium MLC).",
+      "Mätningarna utförs med StarTrack-systemet (IBA) som placeras inuti fantomet MatriXX MultiCube och linjeras upp med laserlinjer och markeringar på fantomet. StartTrack skall vridas så att elektroniken är riktade mot bordets fotände. Förbestråla 300 MU med ett 20×20 cm² fält. Mät sedan upp dosfördelningen för 100 MU med ett öppet 20×20 cm² fält. Använd patient [internt id] (HD-MLC) resp [internt id] (Millenium MLC).",
     ],
     blocks: [
       {

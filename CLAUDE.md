@@ -29,6 +29,11 @@ excludes `*.pdf` and `*.xlsx`): ask the user for them when an issue needs them.
 - **Instruction text is verbatim.** Repair extraction damage (a lost `±`, `°`, `×`, `µ`), never
   reword. A new utgåva of the instruction replaces the text *and* the version the report cites
   (`INSTRUCTION` in `js/protocol.js`) in the same PR.
+- **The repo and the site are public: censor what is internal.** File paths on network drives or
+  in cloud folders become `[intern sökväg]`, system ids such as test patients become
+  `[internt id]`; names of people and personal identity numbers never go in at all.
+  `tests/public.test.js` reds on a drive path, a cloud-folder path, a patient number or a
+  personnummer anywhere in the repo.
 - **Every reference value and tolerance cites its cell.** A PR that adds or changes one names the
   sheet and cell (`Referensvärden!J9`) so the reviewer can check it against the workbook. Never
   guess a number: ask for the workbook.
