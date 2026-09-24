@@ -51,14 +51,15 @@ Hard-reload, or tick *Update on reload* in DevTools › Application.
 | File | Role | DOM? |
 | --- | --- | --- |
 | `js/checks.js` | Pure logic: read a typed number, judge it against a rule, roll results up into section and overall verdicts | No |
+| `js/format.js` | How numbers, rules, deviations and verdicts read, on screen and in the report | No |
 | `js/protocol.js` | Builds the sections and checks for one linac: instruction text, general tolerances, the per-beam sections | No |
 | `js/linacs/*.js` | One file per linac, **numbers only** (beams, reference values, MU for the output check). Registered in `js/linacs/index.js` | No |
 | `js/store.js` | Saved sessions in `localStorage`; JSON export and import | No |
-| `js/app.js` | Renders the form and wires events | Yes |
-| `js/report.js` | Renders the printable report | Yes |
+| `js/report.js` | Builds the printable report as an HTML string | No |
+| `js/app.js` | Renders the form, wires events, puts the report on the page and prints it | Yes |
 | `sw.js` | Service worker: the app must work with no signal in the bunker | — |
 
-- **Only `app.js` and `report.js` touch the DOM.** Everything else is imported by the Node tests.
+- **Only `app.js` touches the DOM.** Everything else is imported by the Node tests.
 - **Adding a linac is a data file plus one line in `js/linacs/index.js`.** If a linac needs
   something the data cannot express, extend `protocol.js`; never put logic in a data file.
 - **Every file the page loads is in `PRECACHE` in `sw.js`.** A file missing from it works in the
