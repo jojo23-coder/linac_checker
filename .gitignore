@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+
+# Source documents (the instruction PDF and the results workbook) stay out of the public repo.
+*.pdf
+*.xlsx
+*.xls
