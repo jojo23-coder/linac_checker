@@ -133,13 +133,14 @@ function actionsTable(actions) {
     </table>`;
 }
 
+// The group heading goes inside its first section's block: a block never splits across pages,
+// so the heading moves with it instead of being stranded at the bottom of the previous page.
 function groupDetails({ group, sections }, session) {
-  return `
-    <h3 class="report-group">${escapeHtml(`${group.number}. ${group.title}`)}</h3>
-    ${sections.map((sectionSummary) => sectionDetails(sectionSummary, session)).join("")}`;
+  const heading = `<h3 class="report-group">${escapeHtml(`${group.number}. ${group.title}`)}</h3>`;
+  return sections.map((sectionSummary, index) => sectionDetails(sectionSummary, session, index === 0 ? heading : "")).join("");
 }
 
-function sectionDetails(sectionSummary, session) {
+function sectionDetails(sectionSummary, session, heading = "") {
   const { section, status, results } = sectionSummary;
   const comment = session.comments[section.id]?.trim();
   const byId = new Map(results.map((result) => [result.item.id, result]));
@@ -157,6 +158,7 @@ function sectionDetails(sectionSummary, session) {
       </table>`;
   return `
     <div class="report-block">
+      ${heading}
       <h4><span>${escapeHtml(`${section.number} ${section.title}`)}</span>${sectionTag(sectionSummary)}</h4>
       ${body}
       ${comment ? `<p class="report-text"><strong>Kommentar:</strong> ${escapeHtml(comment)}</p>` : ""}

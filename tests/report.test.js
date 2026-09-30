@@ -41,3 +41,11 @@ test("a skipped section reads Ej utförd instead of listing empty checks", () =>
 test("the report title doubles as the PDF file name", () => {
   assert.equal(reportTitle(linac, { date: "2026-09-24" }), "Årskontroll Linac 4 2026-09-24");
 });
+
+test("each group heading prints inside its first section's block, so a page break cannot separate them", () => {
+  const html = report(createSession({ linacId: "linac4", date: "2026-09-24" }));
+  for (const heading of ["2. Allmänt", "3. 6 MV fotoner", "4. 10 MV fotoner", "5. 15 MV fotoner", "6. 6 MV FFF fotoner"]) {
+    const pattern = new RegExp(`<div class="report-block">\\s*<h3 class="report-group">${heading}</h3>`);
+    assert.match(html, pattern, heading);
+  }
+});
